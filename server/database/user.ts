@@ -11,12 +11,14 @@ export class UserTable {
   async init() {
     await this.db.prepare(`
       CREATE TABLE IF NOT EXISTS user (
-        id TEXT PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY,
         email TEXT,
         data TEXT,
         type TEXT,
-        created INTEGER,
-        updated INTEGER
+        created BIGINT,
+        updated BIGINT,
+        created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       );
     `).run()
     await this.db.prepare(`
